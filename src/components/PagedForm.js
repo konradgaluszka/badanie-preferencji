@@ -16,14 +16,11 @@ export default class PagedForm extends React.Component {
         };
 
         let changeToNextQuestion = () => {
-            this.setState({currentQuestionIndex: (this.state.currentQuestionIndex + 1) % questions.length})
+            this.setState({currentQuestionIndex: Math.min(this.state.currentQuestionIndex + 1, questions.length - 1)})
         };
 
         let changeToPrevQuestion = () => {
-            let nextIndex = this.state.currentQuestionIndex - 1;
-            nextIndex = nextIndex >= questions.length ? 0 : nextIndex;
-            nextIndex = nextIndex < 0 ? questions.length - 1 : nextIndex;
-            this.setState({currentQuestionIndex: nextIndex})
+            this.setState({currentQuestionIndex: Math.max(this.state.currentQuestionIndex - 1, 0)})
         };
 
         let changeToQuestion = (index) => {
@@ -69,8 +66,10 @@ export default class PagedForm extends React.Component {
                             Nie
                         </Radio>
                         <ButtonToolbar>
-                            <Button bsSize="large" onClick={changeToPrevQuestion} active>Wstecz</Button>
-                            <Button bsStyle="primary" bsSize="large" onClick={changeToNextQuestion} active>Następne pytanie</Button>
+                            <Button bsSize="large" onClick={changeToPrevQuestion} disabled={this.state.currentQuestionIndex == 0}>
+                                Wstecz</Button>
+                            <Button bsStyle="primary" bsSize="large" onClick={changeToNextQuestion}
+                                    disabled={this.state.currentQuestionIndex == questions.length - 1}>Następne pytanie</Button>
                         </ButtonToolbar>
                     </Col>
                 </Row>
