@@ -31,34 +31,38 @@ export default class PagedForm extends React.Component {
           return Math.floor(((this.state.currentQuestionIndex + 1) / questions.length ) * 100);
         };
 
+        let wellStyle = {
+          background: '#fefcfc'
+        };
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col xs={6} md={8}>
-                        <PageHeader>Another brick in the wall <small>Pink Floyd</small></PageHeader>
+                        <PageHeader>Część słuchowa <small>Posłuchaj i odpowiedz na pytania</small></PageHeader>
                     </Col>
                 </Row>
-                <Row className="show-grid">
-                    <Col xs={6} md={5}>
-                        <Image src={"/images/" + currentQuestion().img} responsive/>
+                <Row className="show-grid well" style={wellStyle}>
+                    <Col xs={6} md={5} className="text-center">
+                        <Image src={"/images/music.jpg"} responsive/>
+                        <h2>00:45</h2>
                     </Col>
                     <Col xs={6} md={7}>
                         <h3>{currentQuestion().label}</h3>
-                        <strong>1. Pytanie pierwsze, Pytanie pierwsze, Pytanie pierwsze, Pytanie pierwsze</strong>
+                        <strong>1. {questions[0].text}</strong>
                         <Radio checked readOnly>
                             Tak
                         </Radio>
                         <Radio readOnly>
                             Nie
                         </Radio>
-                        <strong>2. Pytanie drugie, Pytanie drugie, Pytanie drugie, Pytanie drugie</strong>
+                        <strong>2. {questions[1].text}</strong>
                         <Radio readOnly>
                             Tak
                         </Radio>
                         <Radio checked readOnly>
                             Nie
                         </Radio>
-                        <strong>3. Pytanie trzecie, Pytanie trzecie, Pytanie trzecie, Pytanie trzecie,</strong>
+                        <strong>3. {questions[2].text}</strong>
                         <Radio checked readOnly>
                             Tak
                         </Radio>
