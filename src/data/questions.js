@@ -4,18 +4,14 @@ export const questions = [
     {text: "Czy podoba Ci się ten gatunek?"},
 ];
 
-export const songs = {
-    pop: [
-        {file: "Orbital Belfast.mp3"},
-        {file: "Hey - Czas spełnienia.mp3"},
-        {file: "The Strokes - Take It Or Leave It.mp3"}
-    ],
-    rock: [
-        {file: "Orbital Belfast.mp3"},
-        {file: "Hey - Czas spełnienia.mp3"},
-        {file: "The Strokes - Take It Or Leave It.mp3"}
-    ]
-};
+export const songs = [
+    {file: "Orbital Belfast.mp3", genre: 'electronic'},
+    {file: "Hey - Czas spełnienia.mp3", genre: 'rock'},
+    {file: "The Strokes - Take It Or Leave It.mp3", genre: 'pop'},
+    {file: "Orbital Belfast.mp3", genre: 'electronic'},
+    {file: "Hey - Czas spełnienia.mp3", genre: 'rock'},
+    {file: "The Strokes - Take It Or Leave It.mp3", genre: 'pop'}
+];
 
 // ok 14 gatunkow po 3 piosenki
 // wymieszane utwory
