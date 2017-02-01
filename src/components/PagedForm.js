@@ -2,6 +2,7 @@ import React from 'react';
 import {Grid, Row, Col, Image, PageHeader, Radio, ProgressBar, Pagination, small, ButtonToolbar, Button} from 'react-bootstrap';
 import {questions, songs} from '../data/questions';
 import MusicLoop from './MusicLoop';
+import AnswerForSingleQuestion from './AnswerForSingleQuestion';
 
 export default class PagedForm extends React.Component {
     constructor() {
@@ -66,42 +67,28 @@ export default class PagedForm extends React.Component {
                         <MusicLoop song={currentSong().file}/>
                     </Col>
                     <Col xs={6} md={7}>
-                        <strong>1. {questions[0].text}</strong>
-                        <br/>
-                        <input type="radio" name="tak-0"
-                               value={true}
-                               checked={answerForQuestion(0)(true)}
-                               onChange={answerChangedForQuestion(0)} /> Tak
-                        <br/>
-                        <input type="radio" name="nie-0"
-                               value={false}
-                               checked={answerForQuestion(0)(false)}
-                               onChange={answerChangedForQuestion(0)} /> Nie
-                        <br/>
-                        <strong>2. {questions[1].text}</strong>
-                        <br/>
-                        <input type="radio" name="tak-1"
-                               value={true}
-                               checked={answerForQuestion(1)(true)}
-                               onChange={answerChangedForQuestion(1)} /> Tak
-                        <br/>
-                        <input type="radio" name="nie-1"
-                               value={false}
-                               checked={answerForQuestion(1)(false)}
-                               onChange={answerChangedForQuestion(1)} /> Nie
-                        <br/>
-                        <strong>3. {questions[2].text}</strong>
-                        <br/>
-                        <input type="radio" name="tak-2"
-                               value={true}
-                               checked={answerForQuestion(2)(true)}
-                               onChange={answerChangedForQuestion(2)} /> Tak
-                        <br/>
-                        <input type="radio" name="nie-2"
-                               value={false}
-                               checked={answerForQuestion(2)(false)}
-                               onChange={answerChangedForQuestion(2)} /> Nie
-                        <br/>
+                        <AnswerForSingleQuestion
+                            questionId="firstQuestion"
+                            question={"1. " + questions[0].text}
+                            isYesChecked={answerForQuestion(0)(true)}
+                            isNoChecked={answerForQuestion(0)(false)}
+                            answerChanged={answerChangedForQuestion(0)}
+                        />
+                        <AnswerForSingleQuestion
+                            questionId="secondQuestion"
+                            question={"2. " + questions[1].text}
+                            isYesChecked={answerForQuestion(1)(true)}
+                            isNoChecked={answerForQuestion(1)(false)}
+                            answerChanged={answerChangedForQuestion(1)}
+                        />
+                        <AnswerForSingleQuestion
+                            questionId="thirdQuestion"
+                            question={"3. " + questions[2].text}
+                            isYesChecked={answerForQuestion(2)(true)}
+                            isNoChecked={answerForQuestion(2)(false)}
+                            answerChanged={answerChangedForQuestion(2)}
+                        />
+
                         <ButtonToolbar>
                             <Button bsSize="large" onClick={changeToPrevSong} disabled={this.state.currentSongIndex == 0}>
                                 Wstecz</Button>
