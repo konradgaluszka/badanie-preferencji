@@ -6,15 +6,18 @@ export default class MusicLoop extends React.Component {
         super();
         this.myAudio = undefined;
         this.state = {currentTime: 0};
+        this.timeSums = 0;
         this.count = this.count.bind(this);
         this.repeatPlaying = this.repeatPlaying.bind(this);
     }
 
     count() {
-        this.setState({currentTime: this.state.currentTime + 1});
+        this.setState({currentTime: this.timeSums + this.myAudio.currentTime});
+
     }
 
     repeatPlaying(){
+        this.timeSums = this.timeSums + this.myAudio.currentTime;
         this.myAudio.play();
     }
 
@@ -40,12 +43,18 @@ export default class MusicLoop extends React.Component {
         clearInterval(this.state.intervalId);
     }
 
+
     render() {
         this.changeToSong(this.props.song);
+
+        let niceCounter = (units) => {
+            return units.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        };
+
         let toNiceTime = (time) => {
           let minutes = Math.floor(time / 60);
-          let seconds = time - 60 * minutes;
-          return minutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + " : " + seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+          let seconds = Math.floor(time - 60 * minutes);
+          return niceCounter(minutes) + " : " + niceCounter(seconds);
         };
         return (
             <div>
