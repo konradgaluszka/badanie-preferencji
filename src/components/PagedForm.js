@@ -64,7 +64,7 @@ export default class PagedForm extends React.Component {
                 </Row>
                 <Row className="show-grid well" style={wellStyle}>
                     <Col xs={6} md={5} className="text-center">
-                        <MusicLoop song={currentSong().file}/>
+                        {/*<MusicLoop song={currentSong().file}/>*/}
                     </Col>
                     <Col xs={6} md={7}>
                         <AnswerForSingleQuestion
