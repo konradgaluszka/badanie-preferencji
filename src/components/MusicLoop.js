@@ -40,12 +40,12 @@ export default class MusicLoop extends React.Component {
     }
 
     componentWillUnmount() {
-        clearInterval(this.state.intervalId);
+        // clearInterval(this.state.intervalId);
     }
 
 
     render() {
-        this.changeToSong(this.props.song);
+        // this.changeToSong(this.props.song);
 
         let niceCounter = (units) => {
             return units.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
@@ -59,7 +59,7 @@ export default class MusicLoop extends React.Component {
         return (
             <div>
                 <Image src={"/images/music.jpg"} responsive/>
-                <h2>{toNiceTime(this.state.currentTime)}</h2>
+                <audio preload="auto" src={'/songs/' + this.props.song} loop="true" autoPlay="true"/>
             </div>
         );
     }
