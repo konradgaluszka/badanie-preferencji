@@ -13,7 +13,6 @@ export default class MusicLoop extends React.Component {
 
     count() {
         this.setState({currentTime: this.timeSums + this.myAudio.currentTime});
-
     }
 
     repeatPlaying(){
