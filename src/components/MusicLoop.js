@@ -45,17 +45,6 @@ export default class MusicLoop extends React.Component {
 
 
     render() {
-        // this.changeToSong(this.props.song);
-
-        let niceCounter = (units) => {
-            return units.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-        };
-
-        let toNiceTime = (time) => {
-          let minutes = Math.floor(time / 60);
-          let seconds = Math.floor(time - 60 * minutes);
-          return niceCounter(minutes) + " : " + niceCounter(seconds);
-        };
         return (
             <div>
                 <Image src={"/images/music.jpg"} responsive/>
