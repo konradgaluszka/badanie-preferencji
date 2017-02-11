@@ -24,6 +24,7 @@ module.exports = {
         loaders: [{
             test: path.join(__dirname, 'src'),
             loader: ['babel-loader'],
+            exclude: /node_modules/,
             query: {
                 cacheDirectory: 'babel_cache',
                 presets: debug ? [
@@ -35,6 +36,9 @@ module.exports = {
                     ]
             }
         }]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
     },
     plugins: debug ? [] : [
             new webpack.DefinePlugin({
