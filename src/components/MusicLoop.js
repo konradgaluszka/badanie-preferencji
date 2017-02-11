@@ -43,7 +43,6 @@ export default class MusicLoop extends React.Component {
         // clearInterval(this.state.intervalId);
     }
 
-
     render() {
         return (
             <div>
