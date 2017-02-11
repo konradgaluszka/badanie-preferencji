@@ -27,7 +27,13 @@ module.exports = {
             loader: ['babel-loader'],
             query: {
                 cacheDirectory: 'babel_cache',
-                presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015']
+                presets: debug ? [
+                        'react', 'es2015', 'react-hmre'
+                    ] : [
+                        require.resolve('babel-preset-es2015'),
+                        require.resolve('babel-preset-react'),
+                        require.resolve('babel-preset-stage-0')
+                    ]
             }
         }]
     },
