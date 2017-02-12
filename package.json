@@ -4,11 +4,11 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "npm run build && NODE_ENV=production node_modules/.bin/babel-node --presets 'react,es2015' src/server.js",
+    "start": "npm run build && NODE_ENV=production babel-node --presets 'react,es2015' src/server.js",
     "start-dev": "npm run start-dev-hmr",
-    "start-dev-single-page": "node_modules/.bin/http-server src/static",
-    "start-dev-hmr": "node_modules/.bin/webpack-dev-server --progress --inline --hot",
-    "build": "NODE_ENV=production node_modules/.bin/webpack -p"
+    "start-dev-single-page": "http-server src/static",
+    "start-dev-hmr": "webpack-dev-server --progress --inline --hot",
+    "build": "NODE_ENV=production webpack -p"
   },
   "engines": {
     "node": "7.5.0"
