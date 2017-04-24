@@ -11,6 +11,7 @@ export default class MusicFormPages extends React.Component {
         let wellStyle = {
             background: '#fefcfc'
         };
+        console.log(currentSongIndex, songs.length)
 
         return (
             <Row className="show-grid well" style={wellStyle}>
@@ -31,7 +32,7 @@ export default class MusicFormPages extends React.Component {
                             bsStyle="primary"
                             bsSize="large"
                             onClick={this.props.changeToNextSong}
-                            disabled={false}>Następne pytanie</Button>
+                            disabled={currentSongIndex + 1 === songs.length}>Następne pytanie</Button>
                     </ButtonToolbar>
                 </Col>
             </Row>
