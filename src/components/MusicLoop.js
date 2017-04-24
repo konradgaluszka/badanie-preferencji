@@ -1,5 +1,8 @@
 import React from 'react';
-import {Image} from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
+
+import image from '../static/images/music.jpg';
+
 
 export default class MusicLoop extends React.Component {
     constructor() {
@@ -15,7 +18,7 @@ export default class MusicLoop extends React.Component {
         this.setState({currentTime: this.timeSums + this.myAudio.currentTime});
     }
 
-    repeatPlaying(){
+    repeatPlaying() {
         this.timeSums = this.timeSums + this.myAudio.currentTime;
         this.myAudio.play();
     }
@@ -24,17 +27,19 @@ export default class MusicLoop extends React.Component {
         if(song === this.state.currentSong) {
             return;
         }
-        if (this.myAudio != undefined) {
+        if (this.myAudio !== undefined) {
             this.myAudio.pause();
         }
-        this.state.currentTime = 0;
-        this.state.currentSong = song;
+        this.setState({
+            currentTime: 0,
+            currentSong: song,
+        });
         this.myAudio = new Audio('/songs/' + song);
         this.myAudio.addEventListener('ended', this.repeatPlaying , false);
         this.myAudio.play();
-        if(this.state.intervalId == undefined) {
+        if(this.state.intervalId === undefined) {
             let intervalId = setInterval(this.count, 1000);
-            this.state.intervalId = intervalId;
+            this.setState({intervalId});
         }
     }
 
@@ -45,8 +50,8 @@ export default class MusicLoop extends React.Component {
     render() {
         return (
             <div>
-                <Image src={"/images/music.jpg"} responsive/>
-                <audio preload="auto" src={'/songs/' + this.props.song} loop="true" autoPlay="true"/>
+                <Image src={image} responsive/>
+                <audio preload="auto" src={require('../static/songs/' + this.props.song )} loop="true" autoPlay="true"/>
             </div>
         );
     }

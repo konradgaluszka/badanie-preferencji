@@ -1,5 +1,7 @@
 import React from 'react';
-import {Navbar, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
+import { Link } from 'react-router';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+
 
 export default class TopNavbar extends React.Component {
     render() {
@@ -7,7 +9,7 @@ export default class TopNavbar extends React.Component {
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">Badanie preferencji muzycznych</a>
+                        <Link to="/">Badanie preferencji muzycznych</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
