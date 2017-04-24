@@ -1,5 +1,0 @@
-Build code for webpack http server:
-./node_modules/.bin/webpack  --content-base build/
-
-RUn code for webpack http server:
-node_modules/.bin/http-server src/static
