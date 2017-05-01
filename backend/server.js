@@ -9,7 +9,7 @@ const doc = new GoogleSpreadsheet('1C900Ove2kQE7WuthFJ9iAtgLBwMaAt0fSaqTysnqiT8'
  
 // Authenticate with the Google Spreadsheets API.
 doc.useServiceAccountAuth(creds, err => {
-  doc.addRow(1, { last_name: 'Agnew', first_name: 'Samuel' }, err => {
+  doc.addRow(1, { last_name: 'Ksdfdsfe', first_name: 'ale fasdfjowe' }, err => {
     if(err) {
       console.log(err);
     }

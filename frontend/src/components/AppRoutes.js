@@ -10,7 +10,6 @@ export default class AppRoutes extends React.Component {
             <Router
                 history={browserHistory}
                 routes={routes}
-                onUpdate={() => window.scrollTo(0, 0)}
             />
         );
     }

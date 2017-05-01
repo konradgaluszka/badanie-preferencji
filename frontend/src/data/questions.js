@@ -16,34 +16,44 @@ export const questions = [
 export const songs = [
     {
         id: 0,
-        filename: "Orbital Belfast.mp3",
-        genre: 'electronic'
+        name: "BLUES Stand By Me-Ben E. King (mp3cut.net)",
+        genre: 'alternatywa'
     },
     {
         id: 1,
-        filename: "Hey - Czas spełnienia.mp3",
-        genre: 'rock'
+        name: "BLUES Howlin Wolf - Back Door Man (mp3cut.net)",
+        genre: 'alternatywa'
     },
     {
         id: 2,
-        filename: "The Strokes - Take It Or Leave It.mp3",
-        genre: 'pop'
+        name: "BLUES Arthur Crudup - Thats All Right (original version) (mp3cut.net)",
+        genre: 'alternatywa'
     },
     {
         id: 3,
-        filename: "Orbital Belfast.mp3",
-        genre: 'electronic'
+        name: "ALTERNATYWA The Smashing Pumpkins - Bullet with Butterfly Wings (mp3cut.net)",
+        genre: 'alternatywa'
     },
     {
         id: 4,
-        filename: "Hey - Czas spełnienia.mp3",
-        genre: 'rock'
+        name: "ALTERNATYWA Coldplay - Viva La Vida (mp3cut.net)",
+        genre: 'alternatywa'
     },
     {
         id: 5,
-        filename: "The Strokes - Take It Or Leave It.mp3",
+        name: "Orbital Belfast",
+        genre: 'electronic'
+    },
+    {
+        id: 6,
+        name: "Hey - Czas spełnienia",
+        genre: 'rock'
+    },
+    {
+        id: 7,
+        name: "The Strokes - Take It Or Leave It",
         genre: 'pop'
-    }
+    },
 ];
 
 // ok 14 gatunkow po 3 piosenki wymieszane utwory na ekranie: neutralne tlo
