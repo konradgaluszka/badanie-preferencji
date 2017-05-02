@@ -21,7 +21,7 @@ import image from '../static/images/music.jpg';
             setTimeout(() => {
                 this.audio.play();
                 this.setState({ isLoaded: true,});
-                }, 300);
+                }, 350);
         }
 
         render() {

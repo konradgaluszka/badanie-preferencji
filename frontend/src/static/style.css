@@ -3,6 +3,10 @@
     height: 46px;
 }
 
+option:not(:first-child) {
+    color: black;
+}
+
 .center {
     display: flex;
     align-items: center;
@@ -48,3 +52,109 @@ label {
     margin-left: 10px;
 }
 
+.wizard {
+    min-height: 350px;
+}
+
+.select-style {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+.person-gender-wrapper {
+    display: flex;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.person-age-wrapper {
+    display: flex;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.person-details-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.person-details-form label {
+    height: 20px;
+    margin: 0 10px 0 0;
+    width: 102px;
+}
+
+.person-details-form input {
+    width: 120px;
+    padding: 5px 8px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.person-details-form button {
+    position: static;
+}
+
+.person-button-wrapper {
+    height: 46px;
+}
+
+.person-inputs-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.person-education-wrapper {
+    display: flex;
+    padding-bottom: 50px;
+}
+
+.person-residence-wrapper {
+    display: flex;
+    padding-bottom: 50px;
+}
+
+.person-error {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 80px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.song-error {
+    position: absolute;
+    left: -80px;
+    right: 0;
+    top: 80px;
+    margin: 0 auto;
+    margin-top: 5px;
+    width: 122%;
+}

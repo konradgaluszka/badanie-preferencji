@@ -17,7 +17,8 @@ export default class MusicFormPages extends React.Component {
         } = this.props;
 
         let wellStyle = {
-            background: '#fefcfc'
+            background: '#fefcfc',
+            marginTop: 30,
         };
 
         return (

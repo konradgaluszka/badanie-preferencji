@@ -17,7 +17,7 @@ export default class HelloPage extends React.Component {
                             component for calling extra attention to featured content or information.</p>
                         <p>
                             <Link to="/survey">
-                                <Button bsStyle="primary">Rozpocznij słuchanie</Button>
+                                <Button bsStyle="primary">Rozpocznij ankietę</Button>
                             </Link>
                         </p>
                     </Jumbotron>

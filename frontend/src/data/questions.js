@@ -56,6 +56,14 @@ export const songs = [
     },
 ];
 
+export const answers = songs
+    .reduce((acc, val) => {
+        return {
+            ...acc,
+            [val.name]: {}
+        }
+    }, {})
+
 // ok 14 gatunkow po 3 piosenki wymieszane utwory na ekranie: neutralne tlo
 // odtwarza utwor w petli pytania liczenie czasu ile jest na danym utworze (ile
 // slucha) nawigacja: cofanie, do przodu
