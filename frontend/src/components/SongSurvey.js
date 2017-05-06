@@ -27,7 +27,8 @@ export class SongSurvey extends React.Component {
             answers,
             sendAnswers,
             addAnswer,
-            errors
+            errors,
+            response
          } = this.props;
 
         return (
@@ -43,6 +44,10 @@ export class SongSurvey extends React.Component {
                                 <div className="alert alert-danger text-center song-error">
                                     {errors.notEnoughAnswers}
                                 </div>
+                            }
+                            {
+                                response &&
+                                <div className="alert alert-success text-center song-error">Dziękuję za wypełnienie ankiety!</div>
                             }
                         </Col>
                     </Row>

@@ -1,9 +1,12 @@
 import React from 'react';
+import { browserHistory } from 'react-router'
 
 import { questions, songs, answers } from '../data/questions';
 import { PersonDetails } from './PersonDetails'
 import { SongSurvey } from './SongSurvey';
 
+
+const allSteps = { PersonDetails, SongSurvey };
 
 export default class PagedForm extends React.Component {
     state = {
@@ -12,11 +15,14 @@ export default class PagedForm extends React.Component {
         errors: {},
         songs,
         questions,
-        person: {}
+        person: {},
+        response: false,
+        step: 'PersonDetails'
     }
 
     sendAnswers = () => {
         const { answers } = this.state;
+        this.setState({ errors: {} })
         let errors = {...this.state.errors}
         let unAnsweredSongs = [];
 
@@ -45,7 +51,21 @@ export default class PagedForm extends React.Component {
                 errors,
                 currentSongIndex: unAnsweredSongs[0] - 1
             });
+            return;
         }
+        fetch('http://localhost:8000/survey',
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(this.state)
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({response: res.success})
+            setTimeout(() => browserHistory.push('/'), 2500)
+        });
     }
 
     addAnswer = (e) => {
@@ -60,13 +80,12 @@ export default class PagedForm extends React.Component {
             ...answers[currentSongName],
             [e.target.name]: e.target.value === "true"
         };
-            this.setState({ answers, errors: {} });
+            this.setState({ answers });
     }
 
     changeToSong = index => {
         this.setState({
             currentSongIndex: index - 1,
-            errors: {}
         });
     }
 
@@ -75,7 +94,6 @@ export default class PagedForm extends React.Component {
 
         this.setState({
             currentSongIndex: currentSongIndex + 1,
-            errors: {}
         })
     };
 
@@ -84,7 +102,6 @@ export default class PagedForm extends React.Component {
 
         this.setState({
             currentSongIndex: currentSongIndex - 1,
-            errors: {}
         })
     };
 
@@ -93,35 +110,31 @@ export default class PagedForm extends React.Component {
     };
 
     getPerson = (person) => {
-        this.setState({ person });
+        this.setState({
+            person,
+            step: 'SongSurvey',
+        });
     }
 
     render() {
-        const { songs, questions, currentSongIndex, errors, person } = this.state;
+        const { songs, currentSongIndex, step } = this.state;
         const currentSongName = songs[currentSongIndex].name;
 
+        const ActiveStep = allSteps[step]
+
         return (
-            <div className="wizard">
-                {
-                    person.age && person.gender ?
-                    <SongSurvey
-                        questions={questions}
-                        songs={songs}
-                        currentSongIndex={currentSongIndex}
-                        currentSongName={currentSongName}
-                        changeToNextSong={this.changeToNextSong}
-                        changeToPrevSong={this.changeToPrevSong}
-                        changeToSong={this.changeToSong}
-                        answers={this.state.answers}
-                        addAnswer={this.addAnswer}
-                        sendAnswers={this.sendAnswers}
-                        errors={errors}
-                        getProgress={this.getProgress}
-                    /> :
-                    <PersonDetails 
-                        getPerson={this.getPerson}
-                    />
-                }
+            <div className="paged-form">
+                <ActiveStep
+                    {...this.state}
+                    currentSongName={currentSongName}
+                    sendAnswers={this.sendAnswers}
+                    getPerson={this.getPerson}
+                    getProgress={this.getProgress}
+                    changeToPrevSong={this.changeToPrevSong}
+                    changeToNextSong={this.changeToNextSong}
+                    changeToSong={this.changeToSong}
+                    addAnswer={this.addAnswer}
+                />
             </div>
         );
     }

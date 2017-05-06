@@ -27,7 +27,6 @@ export class PersonDetails extends Component {
         e.preventDefault();
 
         if (gender === '' || residence === '' || education === '' || isNaN(age) || age < 1 || age > 120) {
-            console.log(gender, age)
             let errors = {...this.state.errors};
             errors.person = 'Wprowadzone dane są niewłaściwe'
             this.setState({ errors });
@@ -95,10 +94,8 @@ export class PersonDetails extends Component {
                                             <option value="" disabled>wykształcenie</option>
                                             <option value="niepod">Niepełne podstawowe</option>
                                             <option value="pod">Podstawowe</option>
-                                            <option value="gim">Gimnazjalne</option>
                                             <option value="zaszaw">Zasadnicze zawodowe</option>
                                             <option value="sred">Średnie</option>
-                                            <option value="poli">Policealne</option>
                                             <option value="lic">Licencjat/Inżynier</option>
                                             <option value="wyz">Wyższe</option>
                                         </select>
@@ -114,7 +111,7 @@ export class PersonDetails extends Component {
                                             style={{color: this.handleColor(residence)}}
                                         >
                                             <option value="" disabled>zamieszkanie</option>
-                                            <option value="man">Wieś</option>
+                                            <option value="wies">Wieś</option>
                                             <option value="city10">Miasto do 10 tyś. mieszk.</option>
                                             <option value="city50">Miasto 50 tyś. - 100 tyś. mieszk.</option>
                                             <option value="city100">Miasto 100 tyś. - 500 tyś. mieszk.</option>
