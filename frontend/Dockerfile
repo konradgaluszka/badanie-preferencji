@@ -8,6 +8,6 @@ ADD . /frontend
 
 VOLUME ["/frontend"]
 
-EXPOSE 3000
+EXPOSE 5000
 
-CMD yarn && yarn start
+CMD yarn && yarn build && yarn global add serve && serve -s build

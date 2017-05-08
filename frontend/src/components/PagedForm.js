@@ -53,7 +53,7 @@ export default class PagedForm extends React.Component {
             });
             return;
         }
-        fetch('http://localhost:8000/survey',
+        fetch('http://backend:8000/survey',
         {
             headers: {
                 'Content-Type': 'application/json'
