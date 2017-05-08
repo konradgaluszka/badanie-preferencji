@@ -1,6 +1,6 @@
 FROM node:latest
 
-RUN mkdir -p /frontend
+RUN mkdir -p /frontend && yarn global add serve
 
 WORKDIR /frontend
 
@@ -10,4 +10,4 @@ VOLUME ["/frontend"]
 
 EXPOSE 5000
 
-CMD yarn && yarn build && yarn global add serve && serve -s build
+CMD yarn && yarn build && rm -rf build/static/js/*.map && serve -s build
