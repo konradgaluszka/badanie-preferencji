@@ -54,6 +54,8 @@ label {
 
 .paged-form {
     min-height: 350px;
+    position: relative;
+    bottom: 50px;
 }
 
 .select-style {
@@ -157,4 +159,8 @@ label {
     margin: 0 auto;
     margin-top: 5px;
     width: 122%;
+}
+
+.navbar-inverse {
+    z-index: 100;
 }
