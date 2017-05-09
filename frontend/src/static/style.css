@@ -157,8 +157,10 @@ label {
     right: 0;
     top: 80px;
     margin: 0 auto;
-    margin-top: 5px;
     width: 122%;
+    font-size: 12px;
+    padding: 5px;
+    height: 37%;
 }
 
 .navbar-inverse {

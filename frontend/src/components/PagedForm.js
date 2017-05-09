@@ -47,9 +47,11 @@ export default class PagedForm extends React.Component {
                 Nie udzielono odpowiedzi na stronie: ${unAnsweredSongs}
             `;
 
+            unAnsweredSongs = unAnsweredSongs.split(', ');
+
             this.setState({
                 errors,
-                currentSongIndex: unAnsweredSongs[0] - 1
+                currentSongIndex: Number(unAnsweredSongs[0]) - 1
             });
             return;
         }
@@ -71,6 +73,8 @@ export default class PagedForm extends React.Component {
     addAnswer = (e) => {
         if (!e.target.value) return;
 
+        this.setState({ errors: {} })
+
         const { songs, currentSongIndex } = this.state;
 
         const currentSongName = songs[currentSongIndex].name;
@@ -86,6 +90,7 @@ export default class PagedForm extends React.Component {
     changeToSong = index => {
         this.setState({
             currentSongIndex: index - 1,
+            errors: {}
         });
     }
 
@@ -94,6 +99,7 @@ export default class PagedForm extends React.Component {
 
         this.setState({
             currentSongIndex: currentSongIndex + 1,
+            errors: {}
         })
     };
 
@@ -102,6 +108,7 @@ export default class PagedForm extends React.Component {
 
         this.setState({
             currentSongIndex: currentSongIndex - 1,
+            errors: {}
         })
     };
 
