@@ -6,6 +6,22 @@ import MusicLoop from './MusicLoop';
 
 
 export default class MusicFormPages extends React.Component {
+
+    isValid = () => {
+        const { answers, songs } = this.props;
+            const numberOfAllAnswersInSurvey = songs.length * 3;
+
+            const questionsCompleted = Object
+                .keys(answers)
+                .reduce((acc, val) => {
+                    return acc += Object
+                        .keys(answers[val])
+                        .length
+                }, 0);
+
+        return questionsCompleted === numberOfAllAnswersInSurvey;
+    }
+
     render() {
         const {
             questions,
@@ -50,14 +66,14 @@ export default class MusicFormPages extends React.Component {
                             bsStyle="primary"
                             bsSize="large"
                             onClick={this.props.changeToNextSong}>
-                                Następne pytanie
+                                Następny utwór
                             </Button>
                         :   <Button
                                 className="next-song-submit-btn"
                                 bsStyle="primary"
                                 bsSize="large"
-                                onClick={this.props.sendAnswers}>
-                                    Wyślij
+                                onClick={() => this.props.goToNextStep('song', this.isValid())}>
+                                    Dalej
                             </Button>
                     }
                     </ButtonToolbar>

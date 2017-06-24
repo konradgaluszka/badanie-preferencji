@@ -146,7 +146,7 @@ label {
     position: absolute;
     left: 0;
     right: 0;
-    top: 80px;
+    top: 40px;
     width: 50%;
     margin: 0 auto;
 }
@@ -160,9 +160,126 @@ label {
     width: 122%;
     font-size: 12px;
     padding: 5px;
-    height: 37%;
+    height: 25%;
 }
 
 .navbar-inverse {
     z-index: 100;
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 50px;
 }
+
+.progress {
+    margin-bottom: 0px;
+}
+
+.stompSurvey {
+    margin: 0;
+}
+
+.stompSurvey table {
+    margin: 30px 0;
+}
+
+.stompSurvey .table td {
+    vertical-align: middle;
+}
+
+.stompSurvey td:not(:first-child) {
+    text-align: center;
+}
+
+.stompSurvey td:first-child {
+    width: 150px;
+}
+
+.stompSurvey td:nth-of-type(2) {
+    border-right: 1px solid #cccccc;
+}
+
+.stompSurvey td:nth-child(n+3):nth-last-child(n+2){
+    border: 1px solid #cccccc;
+}
+
+.stompSurvey ul {
+    list-style: none;
+}
+
+.stompSurvey ul li::first-letter {
+    font-weight: bold;
+}
+
+.stompSurvey input {
+    margin: 0 10px;
+    border: none;
+    border-bottom: 1px dotted black;
+    font-weight: bold;
+    background: #EFEFEF;
+    position: relative;
+    bottom: 5px;
+    transition: bottom .1s ease-out;
+}
+.stomp-track-wrapper {
+    padding: 5px 0;
+}
+
+.sss-instruction-wrapper {
+    margin-bottom: 40px;
+}
+
+.sss-instruction-wrapper p:first-child {
+    font-size: 18px;
+    text-align: center;
+}
+
+.sss-questions label {
+    margin-left: 5px;
+    width: 710px;
+    transition: all .2s ease-in-out;
+}
+
+.sss-questions label:hover {
+    color: #00796B;
+}
+
+.sss-checkbox-question-wrapper {
+    display: flex;
+    margin-left: 25px;
+}
+
+.center {
+    margin: 0;
+}
+
+.btn-next {
+    width: 120px;
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+
+.stompSurvey input:focus {
+    bottom: 0px;
+}
+
+input:nth-of-type(3):focus {
+  width: 250px;
+}
+
+@media (max-width: 1400px) {
+    .col-md-5 {
+        width: 56%;
+    }
+}
+
+.paged-form img {
+    max-width: 95%;
+}
+
+.page-header {
+    margin-bottom: 10px;
+    border-bottom: none;
+}
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 
-import image from '../static/images/music.jpg';
+import image from '../../../static/images/music.jpg';
 
 
     export default class MusicLoop extends React.Component {
@@ -37,7 +37,7 @@ import image from '../static/images/music.jpg';
                     <audio
                         ref={audio => this.audio = audio}
                         preload="auto"
-                        src={require(`../static/songs/${song}.mp3`)}
+                        src={require(`../../../static/songs/${song}.mp3`)}
                         loop={true}
                         autoPlay={false}
                         onCanPlayThrough={() => this.playSong()}

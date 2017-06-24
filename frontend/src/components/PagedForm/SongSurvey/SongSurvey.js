@@ -61,6 +61,7 @@ export class SongSurvey extends React.Component {
                             answers={answers}
                             addAnswer={addAnswer}
                             sendAnswers={sendAnswers}
+                            goToNextStep={this.props.goToNextStep}
                         />
                     </div>
                 <hr/>

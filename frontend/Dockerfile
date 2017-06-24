@@ -8,6 +8,6 @@ ADD . /frontend
 
 VOLUME ["/frontend"]
 
-EXPOSE 5000
+EXPOSE 3000
 
-CMD yarn && yarn build && rm -rf build/static/js/*.map && serve -s build
+CMD yarn && yarn start

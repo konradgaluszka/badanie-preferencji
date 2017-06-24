@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import HelloPage from './components/HelloPage';
 import Layout from './components/Layout';
-import PagedForm from './components/PagedForm';
+import PagedForm from './components/PagedForm/PagedForm';
 import NotFoundPage from './components/NotFoundPage';
 
 

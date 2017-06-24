@@ -65,7 +65,7 @@ function getResidenceFullName(location) {
 }
 
 function deserializeData(data) {
-    const { person, answers } = data;
+    const { person, answers, sssAnswers, stompAnswers } = data;
     const AnswersToSpreadSheet = deserializeAnswers(answers);
     const personInformationToSpreadSheet = {
         Płeć: person.gender === 'man' ? 1 : 0,
@@ -73,22 +73,50 @@ function deserializeData(data) {
         'Miejsce zamieszkania': getResidenceFullName(person.residence),
         'Edukacja': getEducationFullName(person.education),
     };
+    const stompAnswersToSpreadSheet = {
+        'Artysta': stompAnswers.track.performer,
+        'Utwór': stompAnswers.track.name,
+        'Gatunek': stompAnswers.track.genre,
+        ...stompAnswers.tabels
+    }
+
+    console.log('here', stompAnswersToSpreadSheet, 'end')
 
     return {
+        MetryczkaPiosenki: {
         ...personInformationToSpreadSheet,
         ...AnswersToSpreadSheet,
+        },
+        STOMP: {
+            ...stompAnswersToSpreadSheet
+        },
+        SSS: {
+            ...sssAnswers
+        }
     }
 }
 
 app.post('/survey', (req, res) => {
     const person = deserializeData(req.body);
+    
     doc.useServiceAccountAuth(creds, err => {
-        doc.addRow(1, person, err => {
+        doc.addRow(1, person.MetryczkaPiosenki, err => {
             if (err) {
                 console.log(err);
-            }
-            if (!err) {
-                res.send({success: true})
+            } else {
+                doc.addRow(3, person.STOMP, err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        doc.addRow(4, person.SSS, err => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                return res.send({success: true})
+                            }
+                        })
+                    }
+                })
             }
         });
     });
