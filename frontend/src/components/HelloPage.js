@@ -9,12 +9,17 @@ export default class HelloPage extends React.Component {
             <Grid>
                 <Row className="show-grid">
                     <Jumbotron>
-                        <h1>Hello, world!</h1>
-                        <p>This is a simple hero unit, a simple jumbotron-style component for calling
-                            extra attention to featured content or information. This is a simple hero unit,
-                            a simple jumbotron-style component for calling extra attention to featured
-                            content or information. This is a simple hero unit, a simple jumbotron-style
-                            component for calling extra attention to featured content or information.</p>
+                        <p>
+                            Witam!
+                        </p>
+                        <p>
+                            Jestem studentką V roku Psychologii i
+                        w związku z praca magisterską prowadzę badania dotyczące preferencji muzycznych.
+                        Mam ogromną prośbę o pomoc w wypełnieniu kwestionariuszy na ten temat.
+                        Udział oczywiście jest anonimowy. Jeśli masz chwilę czasu, to serdecznie zapraszam.
+                        Bardzo prosiłabym o rzetelne odpowiedzi na pytania, ponieważ tylko takie będą miały wartość.
+                        Z góry serdecznie dziękuję.
+                            </p>
                         <p>
                             <Link to="/survey">
                                 <Button bsStyle="primary">Rozpocznij ankietę</Button>

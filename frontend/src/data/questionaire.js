@@ -11,7 +11,8 @@ export const questionaireQuestions = [
     }, {
         id: 3,
         text: 'Słucham muzyki w towarzystwie bliskiej mi osoby'
-    }, {
+    }, 
+    {
         id: 4,
         text: 'Słucham muzyki z rana / po przebudzeniu'
     }, {

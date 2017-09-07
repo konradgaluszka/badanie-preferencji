@@ -6,6 +6,7 @@ import { PersonDetails } from './PersonDetails/PersonDetails'
 import { SongSurvey } from './SongSurvey/SongSurvey';
 import { StompSurvey } from './StompSurvey/StompSurvey';
 import { Questionnaire } from './Questionnaire/Questionnaire';
+import { SongDetails } from './SongDetails'
 import { PTS } from './PTS/PTS';
 
 
@@ -15,6 +16,7 @@ const allSteps = {
     StompSurvey,
     Questionnaire,
     PTS,
+    SongDetails,
 };
 
 export default class PagedForm extends React.Component {
@@ -35,14 +37,16 @@ export default class PagedForm extends React.Component {
         questions,
         person: {},
         response: false,
+        isLoading: false,
         currentStepIndex: 0,
         PTS: {},
-        steps: ['PersonDetails', 'SongSurvey', 'StompSurvey', 'Questionnaire', 'PTS'] // PersonDetails
+        steps: ['PersonDetails', 'PTS', 'StompSurvey', 'Questionnaire', 'SongDetails', 'SongSurvey']
     }
 
     sendAnswers = (name, isValid) => {
         if (isValid) {
-            fetch(`http://localhost:8000/survey`, {
+            this.setState({ isLoading: true })
+            fetch(`http://${location.hostname}:8000/survey`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -51,8 +55,7 @@ export default class PagedForm extends React.Component {
             })
                 .then(res => res.json())
                 .then(res => {
-                    console.log(res)
-                    this.setState({ response: res.success })
+                    this.setState({ response: res.success, isLoading: res.success })
                     setTimeout(() => browserHistory.push('/'), 2500)
                 });
         } else this.handleError(name)

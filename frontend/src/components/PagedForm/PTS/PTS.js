@@ -23,7 +23,7 @@ export class PTS extends Component {
 
 
     render() {
-        const { addQuestionnaireAnswer, sendAnswers, errors, PTS } = this.props;
+        const { addQuestionnaireAnswer, goToNextStep, errors, PTS } = this.props;
         const numberOfAllQuestions = Object.keys(PTSquestions).length;
         const numberofAllAnswers = Object.keys(PTS).length;
 
@@ -51,8 +51,9 @@ export class PTS extends Component {
 
                                 <tbody>
                                     {PTSquestions
-                                        .map(question => (
+                                        .map((question, i) => (
                                             <tr key={question.id}>
+                                                <td>{i + 1}</td>
                                                 <td style={{ verticalAlign: 'middle' }}>{question.text}</td>
                                                 <td style={{ verticalAlign: 'middle' }}>
                                                     {
@@ -79,7 +80,7 @@ export class PTS extends Component {
                         className='btn-next'
                         bsStyle="primary"
                         bsSize="large"
-                        onClick={() => sendAnswers('PTS', numberOfAllQuestions === numberofAllAnswers)}>
+                        onClick={() => goToNextStep('PTS', numberOfAllQuestions === numberofAllAnswers)}>
                         Dalej
                     </Button>
                 </Col>

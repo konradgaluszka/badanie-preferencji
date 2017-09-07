@@ -52,8 +52,9 @@ export class Questionnaire extends Component {
 
                                 <tbody>
                                     {questionaireQuestions
-                                        .map(question => (
+                                        .map((question, i) => (
                                             <tr key={question.id}>
+                                                <td>{i + 1}</td>
                                                 <td style={{ verticalAlign: 'middle' }}>
                                                     {question.text}
                                                 </td>
