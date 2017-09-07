@@ -1,17 +1,20 @@
 import React from 'react';
-import {browserHistory} from 'react-router'
+import { browserHistory } from 'react-router'
 
-import {questions, songs, answers} from '../../data/';
-import {PersonDetails} from './PersonDetails/PersonDetails'
-import {SongSurvey} from './SongSurvey/SongSurvey';
-import {StompSurvey} from './StompSurvey/StompSurvey';
-import {SssTest} from './SssTest/SssTest';
+import { questions, songs, answers } from '../../data/';
+import { PersonDetails } from './PersonDetails/PersonDetails'
+import { SongSurvey } from './SongSurvey/SongSurvey';
+import { StompSurvey } from './StompSurvey/StompSurvey';
+import { Questionnaire } from './Questionnaire/Questionnaire';
+import { PTS } from './PTS/PTS';
+
 
 const allSteps = {
     PersonDetails,
     SongSurvey,
     StompSurvey,
-    SssTest
+    Questionnaire,
+    PTS,
 };
 
 export default class PagedForm extends React.Component {
@@ -26,14 +29,15 @@ export default class PagedForm extends React.Component {
                 genre: ''
             }
         },
-        sssAnswers: {},
+        questionnaire: {},
         errors: {},
         songs,
         questions,
         person: {},
         response: false,
         currentStepIndex: 0,
-        steps: ['PersonDetails', 'SongSurvey', 'StompSurvey', 'SssTest']
+        PTS: {},
+        steps: ['PersonDetails', 'SongSurvey', 'StompSurvey', 'Questionnaire', 'PTS'] // PersonDetails
     }
 
     sendAnswers = (name, isValid) => {
@@ -42,25 +46,25 @@ export default class PagedForm extends React.Component {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                    method: "POST",
-                    body: JSON.stringify(this.state)
-                })
+                method: "POST",
+                body: JSON.stringify(this.state)
+            })
                 .then(res => res.json())
                 .then(res => {
                     console.log(res)
-                    this.setState({response: res.success})
+                    this.setState({ response: res.success })
                     setTimeout(() => browserHistory.push('/'), 2500)
                 });
         } else this.handleError(name)
     }
 
     addAnswer = (e) => {
-        if (!e.target.value) 
+        if (!e.target.value)
             return;
-        
-        this.setState({errors: {}})
 
-        const {songs, currentSongIndex} = this.state;
+        this.setState({ errors: {} })
+
+        const { songs, currentSongIndex } = this.state;
 
         const currentSongName = songs[currentSongIndex].name;
         let answers = {
@@ -71,17 +75,7 @@ export default class PagedForm extends React.Component {
             ...answers[currentSongName],
             [e.target.name]: e.target.value === "true"
         };
-        this.setState({answers});
-    }
-
-    addSssAnswers = (e) => {
-        if (!e.target.value) 
-            return;
-        this.setState({errors: {}})
-
-        const {sssAnswers} = this.state;
-        sssAnswers[`SSS${e.target.name}`] = Number(e.target.value);
-        this.setState({sssAnswers});
+        this.setState({ answers });
     }
 
     changeToSong = index => {
@@ -92,7 +86,7 @@ export default class PagedForm extends React.Component {
     }
 
     changeToNextSong = () => {
-        const {currentSongIndex} = this.state;
+        const { currentSongIndex } = this.state;
 
         this.setState({
             currentSongIndex: currentSongIndex + 1,
@@ -101,7 +95,7 @@ export default class PagedForm extends React.Component {
     };
 
     changeToPrevSong = () => {
-        const {currentSongIndex} = this.state;
+        const { currentSongIndex } = this.state;
 
         this.setState({
             currentSongIndex: currentSongIndex - 1,
@@ -114,34 +108,34 @@ export default class PagedForm extends React.Component {
     };
 
     getPerson = (person) => {
-        this.setState({person});
+        this.setState({ person });
     }
 
     addStompAnswers = (name, answer) => {
-        this.setState({errors: {}});
-        const {stompAnswers} = this.state;
+        this.setState({ errors: {} });
+        const { stompAnswers } = this.state;
         stompAnswers.tabels[name] = answer;
-        this.setState({stompAnswers});
+        this.setState({ stompAnswers });
     }
 
     addTrackStomp = (e) => {
-        this.setState({errors: {}});
-        const {stompAnswers} = this.state;
+        this.setState({ errors: {} });
+        const { stompAnswers } = this.state;
         stompAnswers.track[e.target.name] = e.target.value;
-        this.setState({stompAnswers})
+        this.setState({ stompAnswers })
     }
 
     handleError = (name) => {
-        const {errors} = this.state;
+        const { errors } = this.state;
         if (name === 'stompSurvey') {
             errors[name] = 'Musisz udzielić odpowiedzi na każde pytanie!';
-            this.setState({errors});
+            this.setState({ errors });
             window.scrollTo(0, 0);
         } else if (name === 'person') {
             errors.person = 'Wprowadzone dane są niewłaściwe';
-            this.setState({errors});
+            this.setState({ errors });
         } else if (name === 'song') {
-            const {answers} = this.state;
+            const { answers } = this.state;
             const errors = {
                 ...this.state.errors
             }
@@ -176,26 +170,40 @@ export default class PagedForm extends React.Component {
                 errors,
                 currentSongIndex: Number(unAnsweredSongs[0]) - 1
             });
-        } else if (name === 'sssTest') {
-            errors.sssTest = 'Musisz udzielić odpowiedzi na każde pytanie!';
-            this.setState({errors});
+        } else if (name === 'questionnaire') {
+            errors[name] = 'Musisz udzielić odpowiedzi na każde pytanie!';
+            this.setState({ errors });
+            window.scrollTo(0, 0);
+        }
+        else if (name === 'PTS') {
+            errors[name] = 'Musisz udzielić odpowiedzi na każde pytanie!';
+            this.setState({ errors });
             window.scrollTo(0, 0);
         }
     }
 
+    addQuestionnaireAnswer = (id, value, name) => {
+        this.setState(prevState => ({
+            [name]: {
+                ...prevState[name],
+                [`Q${id + 1}`]: value,
+            }
+        }))
+    }
+
     goToNextStep = (name, isValid = false) => {
-        const {currentStepIndex} = this.state;
+        const { currentStepIndex } = this.state;
         if (isValid) {
             this.setState({
                 currentStepIndex: currentStepIndex + 1
             });
             window.scrollTo(0, 0);
-        } else 
+        } else
             this.handleError(name)
     }
 
     render() {
-        const {songs, currentSongIndex, steps, currentStepIndex} = this.state;
+        const { songs, currentSongIndex, steps, currentStepIndex } = this.state;
         const currentSongName = songs[currentSongIndex].name;
 
         const ActiveStep = allSteps[steps[currentStepIndex]]
@@ -215,7 +223,8 @@ export default class PagedForm extends React.Component {
                     addStompAnswers={this.addStompAnswers}
                     addTrackStomp={this.addTrackStomp}
                     goToNextStep={this.goToNextStep}
-                    addSssAnswers={this.addSssAnswers} />
+                    addSssAnswers={this.addSssAnswers}
+                    addQuestionnaireAnswer={this.addQuestionnaireAnswer} />
             </div>
         );
     }

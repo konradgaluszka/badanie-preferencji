@@ -12,17 +12,15 @@ app.use(bodyParser.json('*'));
 
 const doc = new GoogleSpreadsheet('1C900Ove2kQE7WuthFJ9iAtgLBwMaAt0fSaqTysnqiT8');
 
-
-// kod działa, ale przyda się lepszy sposób - może flatMap?
 function deserializeAnswers(answers) {
     let keys = Object.keys(answers);
     const array = [...Array(keys.length * 3)].map((_, i) => ++i);
     keys = array.reduce((acc, val, index) => {
-        const value = answers[keys[Math.floor(index/3)]][index % 3];
+        const value = answers[keys[Math.floor(index / 3)]][index % 3];
 
         return {
             ...acc,
-            [`p${Math.floor(index/3 + 1)}.${index % 3 + 1}`]: `${(value === true) ? 1 : (value === false) ? 0 : 'błąd'}`
+            [`p${Math.floor(index / 3 + 1)}.${index % 3 + 1}`]: `${(value === true) ? 1 : (value === false) ? 0 : 'błąd'}`
         };
     }, {});
     return keys;
@@ -65,7 +63,7 @@ function getResidenceFullName(location) {
 }
 
 function deserializeData(data) {
-    const { person, answers, sssAnswers, stompAnswers } = data;
+    const { person, answers, questionnaire, stompAnswers, PTS } = data;
     const AnswersToSpreadSheet = deserializeAnswers(answers);
     const personInformationToSpreadSheet = {
         Płeć: person.gender === 'man' ? 1 : 0,
@@ -84,43 +82,32 @@ function deserializeData(data) {
 
     return {
         MetryczkaPiosenki: {
-        ...personInformationToSpreadSheet,
-        ...AnswersToSpreadSheet,
+            ...personInformationToSpreadSheet,
+            ...AnswersToSpreadSheet,
         },
         STOMP: {
             ...stompAnswersToSpreadSheet
         },
-        SSS: {
-            ...sssAnswers
-        }
+        QUE: {
+            ...questionnaire
+        },
+        PTS: {
+            ...PTS
+        },
     }
 }
 
 app.post('/survey', (req, res) => {
     const person = deserializeData(req.body);
-    
+
     doc.useServiceAccountAuth(creds, err => {
-        doc.addRow(1, person.MetryczkaPiosenki, err => {
-            if (err) {
-                console.log(err);
-            } else {
-                doc.addRow(3, person.STOMP, err => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        doc.addRow(4, person.SSS, err => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                return res.send({success: true})
-                            }
-                        })
-                    }
-                })
-            }
-        });
-    });
-});
+        doc.addRow(1, person.MetryczkaPiosenki)
+        doc.addRow(3, person.STOMP)
+        doc.addRow(4, person.QUE)
+        doc.addRow(5, person.PTS)
+        return res.send({ success: true })
+    })
+})
 
 app.get('/', (req, res) => {
     res.send('hello world');

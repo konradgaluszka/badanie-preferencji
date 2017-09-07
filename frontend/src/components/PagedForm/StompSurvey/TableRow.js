@@ -21,7 +21,6 @@ export class TableRow extends Component {
                 color: '#EBEBEB'
             }
         }
-
     }
 
     render() {
