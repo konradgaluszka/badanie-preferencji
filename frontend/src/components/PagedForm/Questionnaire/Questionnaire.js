@@ -60,7 +60,7 @@ export class Questionnaire extends Component {
                                                 </td>
                                                 <td style={{ verticalAlign: 'middle' }}>
                                                     {
-                                                        [1, 2, 3, 4]
+                                                        [1, 2, 3, 4, 5]
                                                             .map(number =>
                                                                 <span
                                                                     key={number}

@@ -12,13 +12,17 @@ export default class HelloPage extends React.Component {
                         <p>
                             Witam!
                         </p>
-                        <p>
-                            Jestem studentką V roku Psychologii i
-                        w związku z praca magisterską prowadzę badania dotyczące preferencji muzycznych.
-                        Mam ogromną prośbę o pomoc w wypełnieniu kwestionariuszy na ten temat.
-                        Udział oczywiście jest anonimowy. Jeśli masz chwilę czasu, to serdecznie zapraszam.
-                        Bardzo prosiłabym o rzetelne odpowiedzi na pytania, ponieważ tylko takie będą miały wartość.
-                        Z góry serdecznie dziękuję.
+                        <p>            
+                        Jestem studentką V roku Psychologii
+                        i w związku z praca magisterską prowadzę badania dotyczące preferencji muzycznych. 
+                        Mam ogromną prośbę o pomoc w wypełnieniu testów związanych z tym tematem. 
+                        Badanie składa się z kwestionariusza temperamentu, testu preferencji muzycznych, 
+                        kwestionariusza, oraz odsłuchowej ankiety preferencji. Udział oczywiście jest anonimowy. 
+                        Całość badania zajmuje około 25 minut. Bardzo proszę o rzetelne odpowiedzi na pytania, 
+                        ponieważ tylko takie będą miały wartość. 
+                        
+                        Z góry serdecznie dziękuję,
+                        Maja Ferens
                             </p>
                         <p>
                             <Link to="/survey">

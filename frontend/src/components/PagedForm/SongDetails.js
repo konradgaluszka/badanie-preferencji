@@ -10,7 +10,7 @@ export class SongDetails extends Component {
             <Row className="show-grid well center">
                 <Col md={5}>
                     <p>
-                        Ostatnia część badania jest odsłuchową ankietą muzyczną.
+                        Ostatnią częścią badania jest odsłuchowa ankieta muzyczna.
                     Składa się z 26 fragmentów piosenek.
                     Uprzejmie proszę o wsłuchanie się w aktualnie odsłuchiwany utwór
                     i odpowiedzenie na wszystkie wyświetlające się pytania.
