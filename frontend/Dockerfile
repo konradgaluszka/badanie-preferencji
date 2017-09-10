@@ -10,4 +10,4 @@ VOLUME ["/frontend"]
 
 EXPOSE 5000
 
-CMD yarn && yarn start
+CMD yarn && yarn build && serve -s build
