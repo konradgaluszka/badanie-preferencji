@@ -10,7 +10,7 @@ export const dataSelect = {
                 text: 'Płeć'
             }, {
                 id: 1,
-                value: 'men',
+                value: 'man',
                 text: 'Mężczyzna'
             }, {
                 id: 2,
