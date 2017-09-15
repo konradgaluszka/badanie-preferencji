@@ -1,7 +1,7 @@
 export const questions = [
     {
         id: 0,
-        text: "Czy znasz ten utwór?"
+        text: "Czy znasz/kojarzysz ten utwór?"
     }, {
         id: 1,
         text: "Czy podoba Ci się ten utwór?"

@@ -36,54 +36,87 @@ export class PTS extends Component {
             <div className="sss-instruction-wrapper">
               <p>
                 KWESTIONARIUSZ TEMPERAMENTU PTS Jan Strelau, Alois Angleitner i
-                Bogdan Zawadzki</p> 
-                <p>Stwierdzenia zawarte w tym kwestionariuszu
-                dotyczą różnych cech temperamentu. Proszę ustosunkować się do
-                wszystkich stwierdzeń. Proszę opisać siebie szczerze, takim
-                jakim Pan był (jaką Pani była) w przybliżeniu przez ostatni rok
-                (ostatnie kilka lat), a nie takim, jakim chciałby Pan (chciałaby
-                Pani) być. Pomocą w ustosunkowaniu się do stwierdzeń może być
-                porównanie siebie z innymi osobami tej samej płci i mniej więcej
-                w tym samym wieku. Żadna z odpowiedzi w kwestionariuszu nie jest
-                dobra ani zła, ponieważ każdy temperament ma swoje zalety.
-                Oczywiście zachowanie i poglądy zmieniają się w zależności od
-                sytuacji. Proszę jednak dokonać ogólnej oceny mówiącej, jaki Pan
-                jest (jaka Pani jest) zazwyczaj.
-                </p>
-              
+                Bogdan Zawadzki
+              </p>
+              <p>
+                Stwierdzenia zawarte w tym kwestionariuszu dotyczą różnych cech
+                temperamentu. Proszę ustosunkować się do wszystkich stwierdzeń.
+                Proszę opisać siebie szczerze, takim jakim Pan był (jaką Pani
+                była) w przybliżeniu przez ostatni rok (ostatnie kilka lat), a
+                nie takim, jakim chciałby Pan (chciałaby Pani) być. Pomocą w
+                ustosunkowaniu się do stwierdzeń może być porównanie siebie z
+                innymi osobami tej samej płci i mniej więcej w tym samym wieku.
+                Żadna z odpowiedzi w kwestionariuszu nie jest dobra ani zła,
+                ponieważ każdy temperament ma swoje zalety. Oczywiście
+                zachowanie i poglądy zmieniają się w zależności od sytuacji.
+                Proszę jednak dokonać ogólnej oceny mówiącej, jaki Pan jest
+                (jaka Pani jest) zazwyczaj.
+              </p>
+
               <ol>
-                <li>Zdecydowanie zgadzam się</li>
-                <li>Raczej się zgadzam</li>
-                <li>Raczej nie zgadzam się</li>
                 <li>Zdecydowanie nie zgadzam się</li>
+                <li>Raczej nie zgadzam się</li>
+                <li>Raczej się zgadzam</li>
+                <li>Zdecydowanie zgadzam się</li>
               </ol>
             </div>
 
             <div className="table-responsive">
-              <table className="table table-bordered">
+              <table className="table table-striped table-bordered">
                 <tbody>
                   {PTSquestions.map((question, i) => (
                     <tr key={question.id}>
-                      <td>{i + 1}</td>
+                      <td
+                        style={{
+                          verticalAlign: "middle",
+                          textAlign: "center",
+                          width: 10
+                        }}
+                      >
+                        {i + 1}
+                      </td>
                       <td style={{ verticalAlign: "middle" }}>
                         {question.text}
                       </td>
-                      <td style={{ verticalAlign: "middle" }}>
-                        {[1, 2, 3, 4].map(number => (
-                          <span
-                            key={number}
-                            style={this.getStyles(question.id, number)}
-                            onClick={() =>
-                              addQuestionnaireAnswer(
-                                question.id,
-                                number,
-                                "PTS"
-                              )}
-                          >
-                            {number}
-                          </span>
-                        ))}
+                      <td style={{ width: 30, verticalAlign: 'middle' }}>
+                        Nie
                       </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexDirection: "column"
+                          }}
+                        >
+                          <small style={{ marginBottom: 10 }}>Wybierz: </small>
+                          <div>
+                            {[
+                              { num: 1, label: "Zdecydowanie nie zgadzam się" },
+                              { num: 2, label: "Raczej nie zgadzam się" },
+                              {num: 3, label: 'Raczej się zgadzam'},
+                              {num:4, label: 'Zdecydowanie zgadzam się'},
+                            ].map(number => (
+                              <span
+                                key={number.num}
+                                style={{ width: 100 }}
+                                title={number.label}
+                                style={this.getStyles(question.id, number.num)}
+                                onClick={() =>
+                                  addQuestionnaireAnswer(
+                                    question.id,
+                                    number.num,
+                                    "PTS"
+                                  )}
+                              >
+                                {number.num}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </td>
+                      <td style={{ width: 30, verticalAlign: 'middle'}}>Tak</td>
                     </tr>
                   ))}
                 </tbody>

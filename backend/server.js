@@ -78,8 +78,6 @@ function deserializeData(data) {
         ...stompAnswers.tabels
     }
 
-    console.log('here', stompAnswersToSpreadSheet, 'end')
-
     return {
         MetryczkaPiosenki: {
             ...personInformationToSpreadSheet,

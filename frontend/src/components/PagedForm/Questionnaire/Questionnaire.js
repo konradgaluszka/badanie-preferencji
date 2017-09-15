@@ -65,22 +65,31 @@ export class Questionnaire extends Component {
                       <td style={{ verticalAlign: "middle" }}>
                         {question.text}
                       </td>
+                      <td>Nigdy</td>
                       <td style={{ verticalAlign: "middle" }}>
-                        {[1, 2, 3, 4, 5].map(number => (
+                        {[
+                          { num: 1, label: "Nigdy" },
+                          { num: 2, label: "Rzadko" },
+                          { num: 3, label: "Niekiedy" },
+                          { num: 4, label: "Często" },
+                          { num: 5, label: "Zawsze" }
+                        ].map(number => (
                           <span
-                            key={number}
-                            style={this.getStyles(question.id, number)}
+                            title={number.label}
+                            key={number.num}
+                            style={this.getStyles(question.id, number.num)}
                             onClick={() =>
                               addQuestionnaireAnswer(
                                 question.id,
-                                number,
+                                number.num,
                                 "questionnaire"
                               )}
                           >
-                            {number}
+                            {number.num}
                           </span>
                         ))}
                       </td>
+                      <td>Zawsze</td>
                     </tr>
                   ))}
                 </tbody>
