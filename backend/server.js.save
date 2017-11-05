@@ -14,7 +14,19 @@ const doc = new GoogleSpreadsheet('1C900Ove2kQE7WuthFJ9iAtgLBwMaAt0fSaqTysnqiT8'
 
 const MongoClient = require('mongodb').MongoClient
 
-const URL = 'mongodb://mongodb:27017/test'
+const URL = 'mongodb://localhost:27017/test'
+
+MongoClient.connect(URL, function(err, db) {
+  if (err) return
+
+  const collection = db.collection('person')
+  collection.insert({name: 'taco', tasty: true}, function(err, result) {
+    collection.find({name: 'taco'}).toArray(function(err, docs) {
+      console.log(docs[0])
+      db.close()
+    })
+  
+})
 
 function deserializeAnswers(answers) {
     let keys = Object.keys(answers);
@@ -29,22 +41,6 @@ function deserializeAnswers(answers) {
     }, {});
     return keys;
 }
-
-
-function deserializeAnswersMongo(answers) {
-    let keys = Object.keys(answers);
-    const array = [...Array(keys.length * 3)].map((_, i) => ++i);
-    keys = array.reduce((acc, val, index) => {
-        const value = answers[keys[Math.floor(index / 3)]][index % 3];
-
-        return {
-            ...acc,
-            [`p${Math.floor(index / 3 + 1)}_${index % 3 + 1}`]: `${(value === true) ? 1 : (value === false) ? 0 : 'błąd'}`
-        };
-    }, {});
-    return keys;
-}
-
 
 function getEducationFullName(education) {
     switch (education) {
@@ -82,40 +78,6 @@ function getResidenceFullName(location) {
     }
 }
 
-function deserializeDataMongo(data) {
-    const { person, answers, questionnaire, stompAnswers, PTS } = data;
-    const AnswersToSpreadSheet = deserializeAnswersMongo(answers);
-    const personInformationToSpreadSheet = {
-        Płeć: person.gender === 'man' ? 1 : 0,
-        'Wiek': person.age,
-        'Miejsce zamieszkania': getResidenceFullName(person.residence),
-        'Edukacja': getEducationFullName(person.education),
-    };
-    const stompAnswersToSpreadSheet = {
-        'Artysta': stompAnswers.track.performer,
-        'Utwór': stompAnswers.track.name,
-        'Gatunek': stompAnswers.track.genre,
-        ...stompAnswers.tabels
-    }
-
-    return {
-        MetryczkaPiosenki: {
-            ...personInformationToSpreadSheet,
-            ...AnswersToSpreadSheet,
-        },
-        STOMP: {
-            ...stompAnswersToSpreadSheet
-        },
-        QUE: {
-            ...questionnaire
-        },
-        PTS: {
-            ...PTS
-        },
-    }
-}
-
-
 function deserializeData(data) {
     const { person, answers, questionnaire, stompAnswers, PTS } = data;
     const AnswersToSpreadSheet = deserializeAnswers(answers);
@@ -151,14 +113,6 @@ function deserializeData(data) {
 
 app.post('/survey', (req, res) => {
     const person = deserializeData(req.body);
-    const personMongo = deserializeDataMongo(req.body)
-console.log('here')
-MongoClient.connect(URL, function(err, db) {
-  if (err) console.log(err)
-
-  const collection = db.collection('person')
-  collection.insert(personMongo)
-})
 
     doc.useServiceAccountAuth(creds, err => {
         doc.addRow(1, person.MetryczkaPiosenki)
